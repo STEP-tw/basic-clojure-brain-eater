@@ -1,5 +1,30 @@
 (ns assignments.lists)
 
+(defn first' [& cols]
+  (loop [cols cols res []]
+    (if (empty? cols)
+      res
+      (let [res (conj res (first (first cols)))]
+        (recur (drop 1 cols)
+               res)
+        )
+      )
+    )
+  )
+
+
+(defn drop' [num & cols]
+  (loop [cols cols res []]
+    (if (empty? cols)
+      res
+      (let [res (conj res (drop num (first cols)))]
+        (recur (drop 1 cols)
+               res)
+        )
+      )
+    )
+  )
+
 (defn map'
   "Implement a non-lazy version of map that accepts a
   mapper function and several collections. The output
@@ -8,15 +33,15 @@
    :use          '[loop recur]
    :dont-use     '[map]
    :implemented? true}
-  [f colls] (loop
+  [f & colls] (loop
               [f f
                colls colls
                result []]
-              (if (empty? colls)
+              (if (some empty? colls)
                 result
                 (let
-                  [result (conj result (f (first colls)))]
-                  (recur f (drop 1 colls) result)
+                  [result (conj result (apply f (apply first' colls)))]
+                  (recur f (apply (partial drop' 1) colls) result)
                   )
                 )
               )

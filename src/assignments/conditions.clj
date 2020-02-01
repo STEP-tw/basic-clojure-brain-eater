@@ -11,24 +11,24 @@
   "Returns the result of x/y unless y is 0. Returns :infinite when y is 0"
   {:level        :easy
    :use          '[if-not zero?]
-   :implemented? false}
-  [x y])
+   :implemented? true}
+  [x y] (if-not (zero? y) (quot x y) :infinite))
 
 (defn harishchandra
   "Only returns truthy values as themselves.
   Falsy values(false and nil) return nil"
   {:level        :easy
    :use          '[when-let]
-   :implemented? false}
-  [x])
+   :implemented? true}
+  [x] (when-let [value x] x))
 
 (defn yudishtira
   "Only returns truthy values as themselves.
   Falsy values(false and nil) return :ashwathama"
   {:level        :easy
    :use          '[if-let]
-   :implemented? false}
-  [x])
+   :implemented? true}
+  [x] (if-let [value x] x :ashwatham))
 
 (defn duplicate-first
   "Returns coll with the first element duplicated.
@@ -36,8 +36,8 @@
   {:level        :easy
    :use          '[when-first concat]
    :alternates   '[empty? seq? conj into]
-   :implemented? false}
-  [coll])
+   :implemented? true}
+  [coll] (when-first [first-ele coll] (cons first-ele  coll)))
 
 (defn five-point-someone
   "Returns :chetan-bhagat if y is 5.
@@ -46,8 +46,22 @@
   Otherwise it returns :universe"
   {:level        :easy
    :use          '[cond]
-   :implemented? false}
-  [x y])
+   :implemented? true}
+  [x y] (cond
+          (= y 5) :chetan-bhagat
+          (= x 5) :satan-bhagat
+          (> x y) :greece
+          :else :universe))
+
+(defn contains-in-order? [search-coll coll] (loop [search-coll search-coll
+                                                     coll coll]
+                                                (if (or (empty? search-coll) (empty? coll)) (empty? search-coll)
+                                                                 (if (some #(= % (first search-coll)) coll)
+                                                                                 (recur (drop 1 search-coll) (drop 1 coll))
+                                                                                 (recur search-coll (drop 1 coll))
+                                                                                 ))
+                                                )
+  )
 
 (defn conditions-apply
   "Given a collection of any length, returns:
@@ -58,8 +72,13 @@
   {:level        :medium
    :use          '[condp filter]
    :alternates   '[if cond]
-   :implemented? false}
-  [coll])
+   :implemented? true}
+  [coll] (condp contains-in-order? coll
+           [1 3] :wonder-woman
+           [:a :b :c] :durga
+           [[2 3] [4 5]] :cleopatra
+           :tuntun
+           ))
 
 (defn repeat-and-truncate
   "Given coll and options to repeat and truncate
