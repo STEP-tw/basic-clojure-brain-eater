@@ -81,3 +81,18 @@
   (testing "[3 1]"
     (is (= :tuntun (conditions-apply [3 1]))))
   )
+
+(deftest repeat-and-truncate-test
+  (testing "(range 4) false true 6)"
+    (is (= [0 1 2 3] (repeat-and-truncate (range 4) false true 6) ))
+    )
+  (testing "(range 4) true false nil)"
+    (is (= [0 1 2 3 0 1 2 3] (repeat-and-truncate (range 4) true false nil) ))
+    )
+  (testing "(range 4) false false nil)"
+    (is (= [0 1 2 3] (repeat-and-truncate (range 4) false false nil) ))
+    )
+  (testing "(range 4) true true 6)"
+    (is (= [0 1 2 3 0 1 ] (repeat-and-truncate (range 4) true true 6) ))
+    )
+  )
