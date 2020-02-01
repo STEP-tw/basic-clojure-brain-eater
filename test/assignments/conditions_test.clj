@@ -96,3 +96,14 @@
     (is (= [0 1 2 3 0 1 ] (repeat-and-truncate (range 4) true true 6) ))
     )
   )
+
+(deftest order-in-words-test
+  (testing "[4 3 2]"
+    (is (= [:x-greater-than-y :y-greater-than-z] (order-in-words 4 3 2) )))
+  (testing "[4 3 5]"
+    (is (= [:x-greater-than-y :z-greater-than-x] (order-in-words 4 3 5) )))
+  (testing "[2 3 4]"
+    (is (= [:z-greater-than-x] (order-in-words 2 3 4) )))
+  (testing "[1 1 1]"
+    (is (= [] (order-in-words 1 1 1) )))
+  )
