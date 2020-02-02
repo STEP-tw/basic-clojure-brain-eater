@@ -87,7 +87,7 @@
   (repeat-and-truncate (range 4) true true 6) => '(0 1 2 3 0 1)"
   {:level        :medium
    :use          '[cond->> concat take]
-   :implemented? false}
+   :implemented? true}
   [coll rep? truncate? n]
   (cond->> coll
            rep? (concat coll)
@@ -103,7 +103,7 @@
   (order-in-words 2 3 4) => [:z-greater-than-x]"
   {:level        :easy
    :use          '[cond-> conj]
-   :implemented? false}
+   :implemented? true}
   [x y z] (cond-> []
                   (> x y) (conj :x-greater-than-y)
                   (> y z) (conj :y-greater-than-z)
@@ -122,8 +122,15 @@
   \"\"  -> :empty-string"
   {:level        :easy
    :use          '[case]
-   :implemented? false}
-  [zero-like-value])
+   :implemented? true}
+  [zero-like-value] (case zero-like-value
+                      0  :zero
+                      [] :empty
+                      () :empty
+                      #{} :empty-set
+                      {}  :empty-map
+                      ""  :empty-string
+                      :not-zero))
 
 (defn zero-separated-palindrome
   "Given a sequence of numbers, increment the list
@@ -132,5 +139,8 @@
   [1 2 3] -> (4 3 2 0 2 3 4)"
   {:level :easy
    :use '[as-> reverse]
-   :implemented? false}
-  [coll])
+   :implemented? true}
+  [coll] (as-> coll coll
+               (map #(if (number? %) (inc %) %) coll)
+               (cons 0 coll)
+               (concat (reverse (drop 1 coll))  coll)))

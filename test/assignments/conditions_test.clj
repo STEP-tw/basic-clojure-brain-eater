@@ -107,3 +107,25 @@
   (testing "[1 1 1]"
     (is (= [] (order-in-words 1 1 1) )))
   )
+
+(deftest zero-aliases-test
+  (testing "0"
+    (is (= :zero (zero-aliases 0) )))
+  (testing "\"\""
+    (is (= :empty-string (zero-aliases "") )))
+  (testing "[]"
+    (is (= :empty (zero-aliases []) )))
+  (testing "()"
+    (is (= :empty (zero-aliases ()) )))
+  (testing "#{}"
+    (is (= :empty-set (zero-aliases #{}) )))
+  (testing "{}"
+    (is (= :empty-map (zero-aliases {}) )))
+  (testing "non zero"
+    (is (= :not-zero (zero-aliases 5) )))
+  )
+
+(deftest zero-separated-palindrome-test
+  (testing "[1 2 3]"
+    (is (= [4 3 2 0 2 3 4] (zero-separated-palindrome [1 2 3]) )))
+  )
