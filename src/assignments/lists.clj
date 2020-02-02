@@ -54,8 +54,19 @@
   {:level        :easy
    :use          '[loop recur]
    :dont-use     '[filter]
-   :implemented? false}
-  [pred coll])
+   :implemented? true}
+  [pred coll] (loop [pred pred
+                     coll coll
+                     res []]
+                (if (empty? coll)
+                    res
+                    (let [res (if (pred (first coll))
+                                (conj res (first coll))
+                                res)]
+                      (recur pred (drop 1 coll) res)
+                      )
+
+                  )))
 
 (defn reduce'
   "Implement your own multi-arity version of reduce

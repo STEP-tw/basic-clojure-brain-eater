@@ -69,8 +69,12 @@
         (l/map' identity [1 2 3])
         (l/map' inc [1 2 3])
         (l/map' + [1 2 3] [4 5 6])
+        ;;
+        (l/filter' (fn [x] true) [1 2 3])
+        (l/filter' #(< % 5) [1 2 3 5 6 7])
         ;; fill the rest accordingly
-        )))
+        )
+      ))
 
 (defn -main [& args]
   (do (run-conditions-fns)

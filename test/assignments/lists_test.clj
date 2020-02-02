@@ -1,6 +1,6 @@
 (ns assignments.lists-test
   (:require [clojure.test :refer :all]
-            [assignments.lists :refer :all]))
+[assignments.lists :refer :all]))
 
 (deftest lists
   (testing "map"
@@ -12,6 +12,16 @@
       )
     (testing "fn with multiple coll"
       (is (= [3 5 7] (map' + [1 2 3] [2 3 4])))
+      )
+    )
+
+  (testing "filter"
+    (testing "truthy pred returns whole coll"
+      (is (= [1 2 3] (filter' (fn [x] true) [1 2 3])))
+      )
+
+    (testing "returns only values for which pred returns true"
+      (is (= [1 2 3] (filter' #(< % 5) [1 2 3 5 6 10])))
       )
     )
   )
