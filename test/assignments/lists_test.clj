@@ -34,5 +34,8 @@
       (is (= 6 (reduce' + [1 2 3])))
       )
 
+    (testing "with initial value"
+      (is (= 12 (reduce' + 6 [1 2 3])))
+      )
     )
   )

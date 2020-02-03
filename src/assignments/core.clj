@@ -75,6 +75,7 @@
         ;;
         (l/reduce' + [1])
         (l/reduce' + [1 2 3])
+        (l/reduce' + 6 [1 2 3])
         ;; fill the rest accordingly
         )
       ))

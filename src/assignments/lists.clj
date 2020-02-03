@@ -85,7 +85,7 @@
                     coll (drop 1 coll)]
                  (recur f res coll)))
               ))
-  ([f init coll]))
+  ([f init coll] (reduce' f (cons init coll))))
 
 (defn count'
   "Implement your own version of count that counts the
