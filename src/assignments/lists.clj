@@ -75,8 +75,16 @@
   {:level        :medium
    :use          '[loop recur]
    :dont-use     '[reduce]
-   :implemented? false}
-  ([f coll])
+   :implemented? true}
+  ([f coll] (loop [f f
+                   res (first coll)
+                   coll (drop 1 coll)
+                 ]
+              (if (empty? coll) res
+                (let [res (f res (first coll))
+                    coll (drop 1 coll)]
+                 (recur f res coll)))
+              ))
   ([f init coll]))
 
 (defn count'

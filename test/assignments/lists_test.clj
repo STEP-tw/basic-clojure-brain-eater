@@ -24,4 +24,15 @@
       (is (= [1 2 3] (filter' #(< % 5) [1 2 3 5 6 10])))
       )
     )
+
+  (testing "reduce"
+    (testing "returns first element if collection has only one ele"
+      (is (= 1 (reduce' + [1])))
+      )
+
+    (testing "returns reduced result"
+      (is (= 6 (reduce' + [1 2 3])))
+      )
+
+    )
   )

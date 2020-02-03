@@ -72,6 +72,9 @@
         ;;
         (l/filter' (fn [x] true) [1 2 3])
         (l/filter' #(< % 5) [1 2 3 5 6 7])
+        ;;
+        (l/reduce' + [1])
+        (l/reduce' + [1 2 3])
         ;; fill the rest accordingly
         )
       ))
