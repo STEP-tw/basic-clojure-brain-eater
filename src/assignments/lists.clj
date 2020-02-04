@@ -5,7 +5,7 @@
     (if (empty? cols)
       res
       (let [res (conj res (first (first cols)))]
-        (recur (drop 1 cols)
+        (recur (rest cols)
                res)
         )
       )
@@ -18,7 +18,7 @@
     (if (empty? cols)
       res
       (let [res (conj res (drop num (first cols)))]
-        (recur (drop 1 cols)
+        (recur (rest cols)
                res)
         )
       )
@@ -63,7 +63,7 @@
                     (let [res (if (pred (first coll))
                                 (conj res (first coll))
                                 res)]
-                      (recur pred (drop 1 coll) res)
+                      (recur pred (rest coll) res)
                       )
 
                   )))
@@ -78,11 +78,11 @@
    :implemented? true}
   ([f coll] (loop [f f
                    res (first coll)
-                   coll (drop 1 coll)
+                   coll (rest coll)
                  ]
               (if (empty? coll) res
                 (let [res (f res (first coll))
-                    coll (drop 1 coll)]
+                    coll (rest coll)]
                  (recur f res coll)))
               ))
   ([f init coll] (reduce' f (cons init coll))))
@@ -93,8 +93,14 @@
   {:level        :easy
    :use          '[loop recur]
    :dont-use     '[count]
-   :implemented? false}
-  ([coll]))
+   :implemented? true}
+  ([coll] (loop [coll coll
+                  count 0]
+             (if (empty? coll)
+               count
+               (recur (rest coll) (inc count)))
+             ))
+  )
 
 (defn reverse'
   "Implement your own version of reverse that reverses a coll.
@@ -102,8 +108,10 @@
   {:level        :easy
    :use          '[reduce conj seqable? when]
    :dont-use     '[reverse]
-   :implemented? false}
-  ([coll]))
+   :implemented? true}
+  ([coll]
+   (when (seqable? coll) (reduce conj '() coll)) )
+  )
 
 (defn every?'
   "Implement your own version of every? that checks if every

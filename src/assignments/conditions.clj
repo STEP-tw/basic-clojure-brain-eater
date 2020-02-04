@@ -57,8 +57,8 @@
                                                      coll coll]
                                                 (if (or (empty? search-coll) (empty? coll)) (empty? search-coll)
                                                                  (if (some #(= % (first search-coll)) coll)
-                                                                                 (recur (drop 1 search-coll) (drop 1 coll))
-                                                                                 (recur search-coll (drop 1 coll))
+                                                                                 (recur (rest search-coll) (rest coll))
+                                                                                 (recur search-coll (rest coll))
                                                                                  ))
                                                 )
   )
@@ -143,4 +143,4 @@
   [coll] (as-> coll coll
                (map #(if (number? %) (inc %) %) coll)
                (cons 0 coll)
-               (concat (reverse (drop 1 coll))  coll)))
+               (concat (reverse (rest coll))  coll)))

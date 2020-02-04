@@ -38,4 +38,40 @@
       (is (= 12 (reduce' + 6 [1 2 3])))
       )
     )
+
+
+  (testing "count"
+    (testing "returns of given vector"
+      (is (= 1 (count' [1])))
+      )
+
+    (testing "returns 0 if empty sequence is given"
+      (is (= 0 (count' [])))
+      )
+
+    (testing "with count of set values"
+      (is (= 4 (count' #{ 1 2 3 4 })))
+      )
+    )
+
+
+  (testing "reverse"
+    (testing "reverses vector"
+      (is (= [5 4 3 2 1] (reverse' [1 2 3 4 5])))
+      )
+
+
+    (testing "reverses list"
+      (is (= '(1 2 3 4) (reverse' '(4 3 2 1))))
+      )
+
+    (testing "returns empty seq if vector is empty"
+      (is (= [] (reverse' [])))
+      )
+
+    (testing "returns nil if sequence is not given"
+      (is (nil? (reverse' 1)))
+      )
+    )
+
   )

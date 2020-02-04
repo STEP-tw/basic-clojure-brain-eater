@@ -76,6 +76,14 @@
         (l/reduce' + [1])
         (l/reduce' + [1 2 3])
         (l/reduce' + 6 [1 2 3])
+        ;;
+        (l/count' [1])
+        (l/count' [])
+        (l/count' #{1 2 3})
+        ;;
+        (l/reverse' [1 2 3 4])
+        (l/reverse' [])
+        (l/reverse' '(3 2 1))
         ;; fill the rest accordingly
         )
       ))
