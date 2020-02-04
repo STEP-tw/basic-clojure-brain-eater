@@ -84,6 +84,10 @@
         (l/reverse' [1 2 3 4])
         (l/reverse' [])
         (l/reverse' '(3 2 1))
+        ;;
+        (l/every?' #(> 5 %) [1 2 3 4])
+        (l/every?' #(> 5 %) [6 7 8])
+        (l/every?' #(> 5 %) [])
         ;; fill the rest accordingly
         )
       ))

@@ -74,4 +74,20 @@
       )
     )
 
+
+  (testing "every?'"
+    (testing "responds with if all elements pass pred"
+      (is (true? (every?' #(> 5 %) [1 2 3 4])))
+      )
+
+
+    (testing "reverses list"
+      (is (false? (every?' #(> 5 %) '(6 7 8))))
+      )
+
+    (testing "returns empty seq if vector is empty"
+      (is (true? (every?' #(> 5 %) [])))
+      )
+    )
+
   )

@@ -119,9 +119,21 @@
   {:level        :easy
    :use          '[loop recur and]
    :dont-use     '[every?]
-   :implemented? false}
-  ([pred coll]))
-
+   :implemented? true}
+  ([pred coll] (loop [pred pred
+                       coll coll
+                       res true]
+                  (if (empty? coll)
+                    res
+                    (recur
+                      pred
+                      (rest coll)
+                      (and res (pred (first coll)))
+                      )
+                    )
+                  )
+   )
+  )
 (defn some?'
   "Implement your own version of some that checks if at least one
   element of a coll satisfies the given predicate. Always return
