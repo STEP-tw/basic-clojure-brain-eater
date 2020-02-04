@@ -81,13 +81,45 @@
       )
 
 
-    (testing "reverses list"
-      (is (false? (every?' #(> 5 %) '(6 7 8))))
+    (testing "response with  false if any ele fails pred"
+      (is (false? (every?' #(> 5 %) '(3 4 6 7 8))))
       )
 
-    (testing "returns empty seq if vector is empty"
+    (testing "returns true for empty"
       (is (true? (every?' #(> 5 %) [])))
       )
     )
 
-  )
+
+  (testing "some?'"
+    (testing "responds with true if all elements pass pred"
+      (is (true? (some?' #(> 5 %) [7 8 3 9 10])))
+      )
+
+
+    (testing "response with  false if any ele fails pred"
+      (is (false? (some?' #(> 5 %) '(7 8 9))))
+      )
+
+    (testing "returns false for empty"
+      (is (false? (some?' #(> 5 %) [])))
+      )
+    )
+
+  (testing "ascending?'"
+    (testing "responds with true if given seq is in ascending order"
+      (is (true? (ascending? [7 8 9 10])))
+      )
+
+
+    (testing "responds with false if given seq is not in ascending order"
+      (is (false? (ascending? '(7 10 8 9))))
+      )
+    )
+
+  (testing "distinct'"
+    (testing "responds unique values"
+      (is (= (frequencies [1 2 3 4]) (frequencies (distinct' [1 1 2 3 3 4]))))
+      )
+    )
+)

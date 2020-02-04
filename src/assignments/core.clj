@@ -88,6 +88,15 @@
         (l/every?' #(> 5 %) [1 2 3 4])
         (l/every?' #(> 5 %) [6 7 8])
         (l/every?' #(> 5 %) [])
+        ;;
+        (l/some?' #(> 5 %) [7 8 3 9 10])
+        (l/some?' #(> 5 %) '(7 8 9))
+        (l/some?' #(> 5 %) [])
+        ;;
+        (l/ascending? [7 8 9 10])
+        (l/ascending? '(7 10 8 9))
+        ;;
+        (l/distinct' [1 1 2 3 3 4])
         ;; fill the rest accordingly
         )
       ))

@@ -134,6 +134,7 @@
                   )
    )
   )
+
 (defn some?'
   "Implement your own version of some that checks if at least one
   element of a coll satisfies the given predicate. Always return
@@ -142,16 +143,27 @@
   {:level        :easy
    :use          '[loop recur or]
    :dont-use     '[some]
-   :implemented? false}
-  ([pred coll]))
+   :implemented? true}
+  ([pred coll]  (loop [pred pred
+                       coll coll]
+                  (if (empty? coll)
+                    false
+                    (if (pred (first coll))
+                      true
+                      (recur pred (rest coll))
+                    )
+                  )
+                  )
+   )
+  )
 
 (defn ascending?
   "Verify if every element is greater than or equal to its predecessor"
   {:level        :easy
    :use          '[partition every? partial apply <=]
    :dont-use     '[loop recur]
-   :implemented? false}
-  [coll])
+   :implemented? true}
+  [coll] (every? #(apply <= %) (partition 2 1 coll)))
 
 (defn distinct'
   "Implement your own lazy sequence version of distinct which returns
@@ -160,8 +172,8 @@
   {:level        :medium
    :use          '[lazy-seq set conj let :optionally letfn]
    :dont-use     '[loop recur distinct]
-   :implemented? false}
-  [coll])
+   :implemented? true}
+  [coll] (lazy-seq (set coll)))
 
 (defn dedupe'
   "Implement your own lazy sequence version of dedupe which returns
