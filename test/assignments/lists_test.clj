@@ -147,4 +147,9 @@
 
   (testing "difference"
     (testing "return difference of sets"
-      (is (= [6 7] (difference [1 2 3 4 5] [3 4 5 6 7]))))))
+      (is (= [6 7] (difference [1 2 3 4 5] [3 4 5 6 7])))))
+
+  (testing "union"
+    (testing "return union of sets"
+      (is (= '(5 6 7 1 2 3 4 5) (union [1 2 3 4 5] [3 4 5 6 7])))))
+  )

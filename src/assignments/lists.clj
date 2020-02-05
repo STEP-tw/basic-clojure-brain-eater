@@ -250,7 +250,24 @@
   {:level        :easy
    :use          '[remove into set ->>]
    :implemented? false}
-  [coll1 coll2])
+  [coll1 coll2] (->> (set coll2)
+                     (remove (partial contains? coll1))
+                     (into (apply list coll1))
+                     ))
+
+
+(defn union
+  "Given two collections, returns a new collection with elements from the second
+  collection added to the first collection if they are missing in the first
+  collection to begin with. Return a list, not a set. It also doesn't matter
+  if elements repeat."
+  {:level        :easy
+   :use          '[remove into set ->>]
+   :implemented? true}
+  [coll1 coll2] (->> (set coll2)
+                     (remove (partial contains? coll1))
+                     (into (apply list coll1))
+                     ))
 
 ;; points-around-origin is a def not a defn
 (def

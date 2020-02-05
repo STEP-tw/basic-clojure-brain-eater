@@ -107,6 +107,8 @@
         (l/transpose [[1 2 3] [4 5 6] [7 8 9]])
         ;;
         (l/difference [1 2 3 4 5] [3 4 5 6 7])
+        ;;
+        (l/union [1 2 3 4 5] [3 4 5 6 7])
         ;; fill the rest accordingly
         )
       ))
