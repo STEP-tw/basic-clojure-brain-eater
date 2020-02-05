@@ -122,4 +122,18 @@
       (is (= (frequencies [1 2 3 4]) (frequencies (distinct' [1 1 2 3 3 4]))))
       )
     )
+
+  (testing "dedupe'"
+    (testing "responds consequent duplicate value removed"
+      (is (= [1 2 3 4 3] (dedupe' [1 1 2 2 2 3 4 3 3 3])))
+      )
+    )
+
+  (testing "sum-of-adjacent-numbers'"
+    (testing "should add adjacent number"
+      (is (= [3 5 8] (sum-of-adjacent-digits [1 2 3 5])
+             )
+          )
+      )
+    )
 )

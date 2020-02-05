@@ -182,8 +182,17 @@
   {:level        :medium
    :use          '[lazy-seq conj let :optionally letfn]
    :dont-use     '[loop recur dedupe]
-   :implemented? false}
-  [coll])
+   :implemented? true}
+  [coll]
+  (if (empty? (rest coll))
+               [(first coll)]
+               (lazy-seq
+                 (if (= (first coll) (second coll))
+                         (dedupe' (rest coll))
+                         (conj (dedupe' (rest coll)) (first coll) )
+                         ))
+               )
+             )
 
 (defn sum-of-adjacent-digits
   "Given a collection, returns a map of the sum of adjacent digits.
@@ -191,8 +200,8 @@
   {:level        :medium
    :use          '[map + rest]
    :dont-use     '[loop recur partition]
-   :implemented? false}
-  [coll])
+   :implemented? true}
+  [coll] (map + coll (rest coll)))
 
 (defn max-three-digit-sequence
   "Given a collection of numbers, find a three digit sequence that

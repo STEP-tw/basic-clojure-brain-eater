@@ -97,6 +97,10 @@
         (l/ascending? '(7 10 8 9))
         ;;
         (l/distinct' [1 1 2 3 3 4])
+        ;;
+        (l/dedupe' [1 1 2 3 3 4 2 3])
+        ;;
+        (l/sum-of-adjacent-digits [1 2 3 5])
         ;; fill the rest accordingly
         )
       ))
