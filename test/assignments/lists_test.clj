@@ -139,16 +139,12 @@
 
   (testing "max-three-digit-sequence"
     (testing "should find maximum sum combination of 3 adjacent values"
-      (is (= [3 5 8] (max-three-digit-sequence [1 2 3 5 8 1])
-             )
-          )
-      )
-    )
+      (is (= [3 5 8] (max-three-digit-sequence [1 2 3 5 8 1])))))
 
   (testing "transpose"
     (testing "transpose the matrix"
-      (is (= [[1 4 7] [2 5 8] [3 6 9]] (transpose  [[1 2 3] [4 5 6] [7 8 9]]))
-          )
-      )
-    )
-)
+      (is (= [[1 4 7] [2 5 8] [3 6 9]] (transpose  [[1 2 3] [4 5 6] [7 8 9]])))))
+
+  (testing "difference"
+    (testing "return difference of sets"
+      (is (= [6 7] (difference [1 2 3 4 5] [3 4 5 6 7]))))))

@@ -105,6 +105,8 @@
         (l/max-three-digit-sequence [1 2 3 5 8 1])
         ;;
         (l/transpose [[1 2 3] [4 5 6] [7 8 9]])
+        ;;
+        (l/difference [1 2 3 4 5] [3 4 5 6 7])
         ;; fill the rest accordingly
         )
       ))
