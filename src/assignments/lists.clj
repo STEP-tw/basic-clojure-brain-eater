@@ -34,17 +34,17 @@
    :dont-use     '[map]
    :implemented? true}
   [f & colls] (loop
-              [f f
-               colls colls
-               result []]
-              (if (some empty? colls)
-                result
-                (let
-                  [result (conj result (apply f (apply first' colls)))]
-                  (recur f (apply (partial drop' 1) colls) result)
+                [f f
+                 colls colls
+                 result []]
+                (if (some empty? colls)
+                  result
+                  (let
+                    [result (conj result (apply f (apply first' colls)))]
+                    (recur f (apply (partial drop' 1) colls) result)
+                    )
                   )
                 )
-              )
   )
 
 (defn filter'
@@ -59,12 +59,12 @@
                      coll coll
                      res []]
                 (if (empty? coll)
-                    res
-                    (let [res (if (pred (first coll))
-                                (conj res (first coll))
-                                res)]
-                      (recur pred (rest coll) res)
-                      )
+                  res
+                  (let [res (if (pred (first coll))
+                              (conj res (first coll))
+                              res)]
+                    (recur pred (rest coll) res)
+                    )
 
                   )))
 
@@ -79,11 +79,11 @@
   ([f coll] (loop [f f
                    res (first coll)
                    coll (rest coll)
-                 ]
+                   ]
               (if (empty? coll) res
-                (let [res (f res (first coll))
-                    coll (rest coll)]
-                 (recur f res coll)))
+                                (let [res (f res (first coll))
+                                      coll (rest coll)]
+                                  (recur f res coll)))
               ))
   ([f init coll] (reduce' f (cons init coll))))
 
@@ -95,11 +95,11 @@
    :dont-use     '[count]
    :implemented? true}
   ([coll] (loop [coll coll
-                  count 0]
-             (if (empty? coll)
-               count
-               (recur (rest coll) (inc count)))
-             ))
+                 count 0]
+            (if (empty? coll)
+              count
+              (recur (rest coll) (inc count)))
+            ))
   )
 
 (defn reverse'
@@ -110,7 +110,7 @@
    :dont-use     '[reverse]
    :implemented? true}
   ([coll]
-   (when (seqable? coll) (reduce conj '() coll)) )
+   (when (seqable? coll) (reduce conj '() coll)))
   )
 
 (defn every?'
@@ -121,17 +121,17 @@
    :dont-use     '[every?]
    :implemented? true}
   ([pred coll] (loop [pred pred
-                       coll coll
-                       res true]
-                  (if (empty? coll)
-                    res
-                    (recur
-                      pred
-                      (rest coll)
-                      (and res (pred (first coll)))
-                      )
-                    )
-                  )
+                      coll coll
+                      res true]
+                 (if (empty? coll)
+                   res
+                   (recur
+                     pred
+                     (rest coll)
+                     (and res (pred (first coll)))
+                     )
+                   )
+                 )
    )
   )
 
@@ -144,16 +144,16 @@
    :use          '[loop recur or]
    :dont-use     '[some]
    :implemented? true}
-  ([pred coll]  (loop [pred pred
-                       coll coll]
-                  (if (empty? coll)
-                    false
-                    (if (pred (first coll))
-                      true
-                      (recur pred (rest coll))
-                    )
-                  )
-                  )
+  ([pred coll] (loop [pred pred
+                      coll coll]
+                 (if (empty? coll)
+                   false
+                   (if (pred (first coll))
+                     true
+                     (recur pred (rest coll))
+                     )
+                   )
+                 )
    )
   )
 
@@ -185,14 +185,14 @@
    :implemented? true}
   [coll]
   (if (empty? (rest coll))
-               [(first coll)]
-               (lazy-seq
-                 (if (= (first coll) (second coll))
-                         (dedupe' (rest coll))
-                         (conj (dedupe' (rest coll)) (first coll) )
-                         ))
-               )
-             )
+    [(first coll)]
+    (lazy-seq
+      (if (= (first coll) (second coll))
+        (dedupe' (rest coll))
+        (conj (dedupe' (rest coll)) (first coll))
+        ))
+    )
+  )
 
 (defn sum-of-adjacent-digits
   "Given a collection, returns a map of the sum of adjacent digits.
@@ -211,8 +211,14 @@
   {:level        :medium
    :use          '[map next nnext max-key partial apply + if ->>]
    :dont-use     '[loop recur partition]
-   :implemented? false}
-  [coll])
+   :implemented? true}
+  [coll] (->> (nnext coll)
+              (map
+                (partial conj [])
+                coll (next coll))
+              (apply max-key #(apply + %))
+       )
+  )
 
 ;; transpose is a def. Not a defn.
 (def

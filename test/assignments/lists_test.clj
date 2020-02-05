@@ -136,4 +136,12 @@
           )
       )
     )
+
+  (testing "max-three-digit-sequence"
+    (testing "should find maximum sum combination of 3 adjacent values"
+      (is (= [3 5 8] (max-three-digit-sequence [1 2 3 5 8 1])
+             )
+          )
+      )
+    )
 )

@@ -101,6 +101,8 @@
         (l/dedupe' [1 1 2 3 3 4 2 3])
         ;;
         (l/sum-of-adjacent-digits [1 2 3 5])
+        ;;
+        (l/max-three-digit-sequence [1 2 3 5 8 1])
         ;; fill the rest accordingly
         )
       ))
