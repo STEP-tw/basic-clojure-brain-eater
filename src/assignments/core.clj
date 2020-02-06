@@ -109,6 +109,10 @@
         (l/difference [1 2 3 4 5] [3 4 5 6 7])
         ;;
         (l/union [1 2 3 4 5] [3 4 5 6 7])
+        ;;
+        (l/points-around-origin)
+        ;;
+        (l/cross-product [1 2 3 6] [4 3 5])
         ;; fill the rest accordingly
         )
       ))

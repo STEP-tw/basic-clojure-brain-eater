@@ -53,15 +53,9 @@
           (> x y) :greece
           :else :universe))
 
-(defn contains-in-order? [search-coll coll] (loop [search-coll search-coll
-                                                     coll coll]
-                                                (if (or (empty? search-coll) (empty? coll)) (empty? search-coll)
-                                                                 (if (some #(= % (first search-coll)) coll)
-                                                                                 (recur (rest search-coll) (rest coll))
-                                                                                 (recur search-coll (rest coll))
-                                                                                 ))
-                                                )
-  )
+(defn contains-in-order? [subset coll] (-> (set subset)
+                                                (filter coll)
+                                                (= subset)))
 
 (defn conditions-apply
   "Given a collection of any length, returns:

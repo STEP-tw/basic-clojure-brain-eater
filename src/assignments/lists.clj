@@ -274,11 +274,15 @@
   ^{:level        :easy
     :use          '[for]
     :dont-use     '[hardcoded-values map filter]
-    :implemented? false}
+    :implemented? true}
   points-around-origin
   "Calculate all the points around the origin
   [-1 -1] [0 -1] [1 -1] etc. There should be 8 points
-  Note this is a def, not a defn")
+  Note this is a def, not a defn"
+  #(for [x (range -1 2)
+         y (range -1 2)
+         :when (not= [0 0] [x y])]
+    [x y]))
 
 (defn cross-product
   "Given two sequences, generate every combination in the sequence
@@ -287,8 +291,12 @@
   [[1 4] [1 3] [1 5] [2 4] [2 3] [2 5] [3 4]]"
   {:level        :easy
    :use          '[for]
-   :implemented? false}
-  [seq1 seq2])
+   :implemented? true}
+  [seq1 seq2]
+  (take-while (partial apply not=)
+              (for [x seq1 y seq2]
+                [x y]))
+  )
 
 (defn double-up
   "Given a collection, return a new collection that contains

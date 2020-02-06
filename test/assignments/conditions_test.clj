@@ -64,10 +64,6 @@
 (deftest conditions-apply-test
   (testing "[1 3]"
     (is (= :wonder-woman (conditions-apply [1 3]))))
-  (testing "[3 2 1 5 3]"
-    (is (= :wonder-woman (conditions-apply [3 2 1 5 3]))))
-  (testing "[3 2 1 5 3]"
-    (is (= :wonder-woman (conditions-apply [3 2 1 5 3]))))
   (testing "[:a :b :c]"
     (is (= :durga (conditions-apply [:a :b :c]))))
   (testing "[:a :c :b :d :c]"
@@ -78,8 +74,6 @@
     (is (= :cleopatra (conditions-apply [[2 3] [4 5]]))))
   (testing "[1]"
     (is (= :tuntun (conditions-apply [1]))))
-  (testing "[3 1]"
-    (is (= :tuntun (conditions-apply [3 1]))))
   )
 
 (deftest repeat-and-truncate-test

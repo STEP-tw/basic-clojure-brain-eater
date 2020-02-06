@@ -152,4 +152,13 @@
   (testing "union"
     (testing "return union of sets"
       (is (= '(5 6 7 1 2 3 4 5) (union [1 2 3 4 5] [3 4 5 6 7])))))
+
+  (testing "points-around-origin"
+    (testing "return points around origin"
+      (is (= [[-1 -1] [-1 0] [-1 1] [0 -1] [0 1] [1 -1] [1 0] [1 1]] (points-around-origin)))))
+
+  (testing "cross-product"
+    (testing "return cross product until both elements are same"
+      (is (= [[1 4] [1 3] [1 5] [2 4] [2 3] [2 5] [3 4]] (cross-product [1 2 3 6 ] [4 3 5])))))
   )
+
