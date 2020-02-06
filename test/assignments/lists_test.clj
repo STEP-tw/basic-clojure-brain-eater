@@ -160,5 +160,9 @@
   (testing "cross-product"
     (testing "return cross product until both elements are same"
       (is (= [[1 4] [1 3] [1 5] [2 4] [2 3] [2 5] [3 4]] (cross-product [1 2 3 6 ] [4 3 5])))))
+
+  (testing "double-up"
+    (testing "return collection with elements repeated twice"
+      (is (= [1 1 2 2 3 3] (double-up [1 2 3])))))
   )
 

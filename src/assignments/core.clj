@@ -113,6 +113,8 @@
         (l/points-around-origin)
         ;;
         (l/cross-product [1 2 3 6] [4 3 5])
+        ;;
+        (l/double-up [1 2 3])
         ;; fill the rest accordingly
         )
       ))
