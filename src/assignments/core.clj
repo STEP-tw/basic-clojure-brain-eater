@@ -117,6 +117,8 @@
         (l/double-up [1 2 3])
         ;;
         (l/third-or-fifth [0 1 2 3 4 5 6 7 8 9 10])
+        ;;
+        (l/sqr-of-the-first [4 5 6])
         ;; fill the rest accordingly
         )
       ))

@@ -168,5 +168,9 @@
   (testing "third-or-fifth"
     (testing "return values with index divisible by 3 or 5"
       (is (= [0 3 5] (third-or-fifth [0 1 2 3 4 5])))))
+
+  (testing "sqr-of-the-first"
+    (testing "returns the same size collection with sqr of first ele as all elements"
+      (is (= [16 16 16] (sqr-of-the-first [4 5 6])))))
   )
 
