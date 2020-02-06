@@ -306,13 +306,21 @@
    :implemented? true}
   [coll] (mapcat (partial repeat 2) coll))
 
+(defn divisible? [a b] (= 0 (mod a b)))
+
 (defn third-or-fifth
   "Given a collection return a new collection that contains
   elements whose index is either divisible by three or five"
   {:level        :easy
    :use          '[keep-indexed when :optionally map-indexed filter]
-   :implemented? false}
-  [coll])
+   :implemented? true}
+  [coll]
+  (keep-indexed
+    #(when
+       (or (divisible? %1 3) (divisible? %1 5))
+       %2)
+    coll)
+  )
 
 (defn sqr-of-the-first
   "Given a collection, return a new collection that contains the

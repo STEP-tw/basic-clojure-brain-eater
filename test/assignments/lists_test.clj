@@ -164,5 +164,9 @@
   (testing "double-up"
     (testing "return collection with elements repeated twice"
       (is (= [1 1 2 2 3 3] (double-up [1 2 3])))))
+
+  (testing "third-or-fifth"
+    (testing "return values with index divisible by 3 or 5"
+      (is (= [0 3 5] (third-or-fifth [0 1 2 3 4 5])))))
   )
 
