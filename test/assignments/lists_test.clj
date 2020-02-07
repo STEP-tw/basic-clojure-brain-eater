@@ -172,5 +172,9 @@
   (testing "sqr-of-the-first"
     (testing "returns the same size collection with sqr of first ele as all elements"
       (is (= [16 16 16] (sqr-of-the-first [4 5 6])))))
+
+  (testing "russian-dolls"
+    (testing "returns nested vectors for each element"
+      (is (= [[1] [2] [3]] (russian-dolls [1 2 3] 2)))))
   )
 

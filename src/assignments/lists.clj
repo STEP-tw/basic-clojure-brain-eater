@@ -4,7 +4,7 @@
   (loop [cols cols res []]
     (if (empty? cols)
       res
-      (let [res (conj res (first (first cols)))]
+      (let [res (conj res (ffirst cols))]
         (recur (rest cols)
                res)
         )
@@ -344,8 +344,12 @@
   {:level        :medium
    :use          '[iterate mapv partial vector drop first ->>]
    :dont-use     '[for loop recur reduce]
-   :implemented? false}
-  [coll nesting-factor])
+   :implemented? true}
+  [coll nesting-factor]
+  (mapv #(->> %
+              (iterate vector)
+              (drop (- nesting-factor 1))
+              (first)) coll))
 
 (defn split-comb
   "Given a collection, return a new sequence where the first
