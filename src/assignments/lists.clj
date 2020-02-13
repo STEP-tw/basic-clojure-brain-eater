@@ -230,8 +230,7 @@
   [[a b] [c d]] => [[a c] [b d]].
   Note this is a def. Not a defn.
   Return a vector of vectors, not list of vectors or vectors of lists"
-  (partial apply map vector)
-  )
+  (partial apply map vector))
 
 (defn difference
   "Given two collections, returns only the elements that are present
@@ -344,7 +343,7 @@
   {:level        :medium
    :use          '[iterate mapv partial vector drop first ->>]
    :dont-use     '[for loop recur reduce]
-   :implemented? true}
+   :implemented? true    }
   [coll nesting-factor]
   (mapv #(->> %
               (iterate vector)
@@ -360,8 +359,17 @@
   {:level        :easy
    :use          '[interleave split-at if rem concat take-last]
    :dont-use     '[loop recur map-indexed take drop]
-   :implemented? false}
-  [coll])
+   :implemented? true}
+  [coll]
+  (let [interleaved-coll
+          (apply
+           interleave
+           (split-at (quot (count coll) 2) coll))]
+    (if (zero? (rem (count coll) 2))
+      interleaved-coll
+      (concat interleaved-coll (take-last 1 coll)))))
+
+(defn always-zero [x] 0)
 
 (defn muted-thirds
   "Given a sequence of numbers, make every third element
@@ -370,16 +378,28 @@
   {:level        :easy
    :use          '[map cycle]
    :dont-use     '[loop recur map-indexed take take-nth]
-   :implemented? false}
-  [coll])
+   :implemented? true}
+  [coll]
+  (map
+   #(%2 %1)
+   coll
+   (cycle [identity identity always-zero])))
 
 (defn palindrome?
   "Implement a recursive palindrome check of any given sequence"
   {:level        :easy
    :use          '[empty? loop recur butlast rest]
    :dont-use     '[reverse]
-   :implemented? false}
-  [coll])
+   :implemented? true}
+  [coll]
+  (loop [coll coll]
+    (if (empty? coll)
+      true
+      (if (= (first coll) (last coll))
+        (recur (-> coll
+                   rest
+                   butlast))
+        false))))
 
 (defn index-of
   "index-of takes a sequence and an element and finds the index
@@ -388,11 +408,33 @@
   {:level        :easy
    :use          '[loop recur rest]
    :dont-use     '[.indexOf memfn]
-   :implemented? false}
-  [coll n])
+   :implemented? true}
+  [coll n]
+  (loop [coll coll
+         n n
+         index 0]
+    (if (empty? coll)
+      -1
+      (if (= (first coll) n)
+        index
+        (recur (rest coll) n (inc index))))))
+
+(defn valid-sudoko-row
+  [row]
+  (= #{1 2 3 4 5 6 7 8 9} (into #{} row)))
+
+(defn get-3*3 [grid]
+  (->> grid
+   (map (partial partition 3))
+   (transpose)
+   (flatten)
+   (partition 9)))
 
 (defn validate-sudoku-grid
   "Given a 9 by 9 sudoku grid, validate it."
   {:level        :hard
    :implemented? false}
-  [grid])
+  [grid]
+  (every?
+   valid-sudoko-row
+   (concat grid (transpose grid) (get-3*3 grid))))
