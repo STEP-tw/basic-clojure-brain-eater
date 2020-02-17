@@ -138,3 +138,25 @@
                (map #(if (number? %) (inc %) %) coll)
                (cons 0 coll)
                (concat (reverse (rest coll))  coll)))
+
+(defn divisible?
+  [x y]
+  (zero? (rem x y)))
+
+(defn is-prime?
+  [num]
+  (let [is-prime (promise)
+        possible-facs (range 2 (inc (Math/sqrt num)))]
+     (def cal
+       (future (doseq [fac possible-facs]
+               (future
+                 (when (true? (divisible? num fac))
+                 (deliver is-prime false))))))
+    (future (loop []
+              (if (realized? cal)
+                  (deliver is-prime true)
+                (do
+                  (Thread/sleep 100)
+                  (recur))
+                  )))
+     (deref is-prime)))
